@@ -2,7 +2,7 @@
 
 http://www.teletwitter.de
 
-Website to use Twitter in Teletext style. No data is storred permanently on the server. All Twitter user tokens are kept in $_SESSION variables which will be deleted automatically after a timeout. Due to this, the users might need to re sign in when they come back another time, but it keeps the (personal) data storred to a minimum (= nothing). If no data is collected, the risk to lose any data is non existing.
+Website to use Twitter in Teletext style. No data is storred permanently on the server. All Twitter user tokens are kept in $_SESSION variables which will be deleted automatically after a timeout. Due to this, the users might need to re sign in when they come back another time, but it keeps the (personal) data storred to a minimum (= nothing). If no data is collected, the risk to lose any data is non existing. Due to this and to very restrictive timeouts I've set on my server, you'll get the message "Twitter token got invalid, please sign in again" when waiting to long. This could be avoided by saving the tokens and placing them via cookie on the users computer, but this is nothing I intend to implement.
 
 # prerequisits
 
