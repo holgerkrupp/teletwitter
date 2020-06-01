@@ -20,7 +20,7 @@ if (running == false){
 		  document.getElementById("pagelookup").innerHTML = document.getElementById("pagelookup").innerHTML + String.fromCharCode(keyCode);
 	  }
 	  if (document.getElementById("pagelookup").innerHTML.length == 3){
-		  if (document.getElementById("pagelookup").innerHTML < 100){
+		  if ((document.getElementById("pagelookup").innerHTML < 100)||(document.getElementById("pagelookup").innerHTML > 899)){
 			  document.getElementById("pagelookup").innerHTML = "";
 		  }else{
 		  	running = true;
