@@ -5,7 +5,7 @@ require "../twitteroauth/autoload.php";
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 
-if(empty($_SESSION['oauth_token'])){
+if(empty($_SESSION['screen_name'])){
 
 $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
 
