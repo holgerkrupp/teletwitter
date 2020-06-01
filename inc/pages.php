@@ -1,10 +1,10 @@
 <?php
-
+  	session_start();
 $page = intval($_POST["page"]);
 if (is_null($page)){
 	$page = 100;
 }
-
+$_SESSION["lastpage"] = $_SESSION["page"];
 $_SESSION["page"] = $page;
 
 

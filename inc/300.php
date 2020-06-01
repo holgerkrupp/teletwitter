@@ -5,7 +5,9 @@
  
 	use Abraham\TwitterOAuth\TwitterOAuth;
 	
-	
+	if ($_SESSION["lastpage"] > 399){
+		unset($_SESSION['content']);
+	};
 	
 	//var_dump($_SESSION);
 	
@@ -22,9 +24,7 @@
 		$numberofTweets = 0;
 		
 		$firstTweetNummer = $tweetsperpage*$page_offset;
-		
-		// 300; 340 ; 380
-		
+				
 		if(!empty($_SESSION['content'])){
 				$lasttweet = end($_SESSION['content']);
 				$_SESSION['last_id'] = $lasttweet->id;
@@ -44,7 +44,7 @@
 		
 		//$_SESSION['content'] = $content;
 	
-		if(!empty($_SESSION['content'])){
+		if(!empty($_SESSION['content'])&&($page <> $pageid)){
 			$_SESSION['content'] = array_merge($_SESSION['content'], $content);
 		}else{
 			$_SESSION['content'] = $content;
@@ -89,7 +89,7 @@
 		echo $screen_name;
 		echo ") <br />";
 		echo $text;
-		echo ") <br />";
+		echo "<br />";
 		echo $created_at;
 		echo "</div>";
 		echo "<div class=\"listright\">";
