@@ -5,19 +5,53 @@
  
 	use Abraham\TwitterOAuth\TwitterOAuth;
 	
+	
+	
 	//var_dump($_SESSION);
-
+	
 	if(!empty($_SESSION['oauth_token'])){
+		
+		
+		$pageid = 300;
+		$offset = 0;
+		$page_offset = $page - $pageid;
+		
+		$tweetsperpage = 5;
+		$tweetsperrequest = 200;
+		
+		$numberofTweets = 0;
+		
+		$firstTweetNummer = $tweetsperpage*$page_offset;
+		
+		// 300; 340 ; 380
+		
+		if(!empty($_SESSION['content'])){
+				$lasttweet = end($_SESSION['content']);
+				$_SESSION['last_id'] = $lasttweet->id;
+				$numberofTweets = count($_SESSION['content']);
+		}
 
-	if ($page == 300){
+		$remaining = $numberofTweets-$firstTweetNummer;
+		
+//		||($numberofTweets - $firstTweetNummer < $tweetsperpage)
+
+	if (($page == $pageid)||($remaining <= $tweetsperpage)){
   	try{
 		$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
 		//$content =$connection->get("account/verify_credentials");
 		
-		$content =$connection->get("statuses/home_timeline", ["count" => 200, "exclude_replies" => true]);
-		$_SESSION['content'] = $content;
-	
+		$content =$connection->get("statuses/home_timeline", ["count" => $tweetsperrequest, "exclude_replies" => true]);
 		
+		//$_SESSION['content'] = $content;
+	
+		if(!empty($_SESSION['content'])){
+			$_SESSION['content'] = array_merge($_SESSION['content'], $content);
+		}else{
+			$_SESSION['content'] = $content;
+		}
+		
+		$content = $_SESSION['content'];
+	
 	}catch (Exception $e){
 	    echo 'Exception access_token: ',  $e->getMessage(), "\n";
 	}
@@ -32,12 +66,12 @@
 
 	<?php
 
-	$offset = ($page - 300)*5;
+	$offset = ($page - $pageid)*$tweetsperpage;
 	
 	
 	
 	if (count($content) > 1){
-		for ($i = $offset; $i <= 4 + $offset; $i++) {
+		for ($i = $offset; $i <= $tweetsperpage-1 + $offset; $i++) {
 		
 		$tweet = $content[$i];
 		
@@ -59,10 +93,18 @@
 		echo $created_at;
 		echo "</div>";
 		echo "<div class=\"listright\">";
-		echo "700" + $i;
+		if (600 + $i < 800){
+			echo "600" + $i;
+		}
+		
 		echo "</div>";
 		
 		}
+		/*
+		echo '<pre>';
+		var_dump($content);
+		echo '</pre>';
+		*/
 	}else{
 		if (count($content) == 1){
 			$error = $content->message;
@@ -88,6 +130,8 @@
 			echo "110";
 			echo "</div>";
 		}
+		
+
   	?>
 
 

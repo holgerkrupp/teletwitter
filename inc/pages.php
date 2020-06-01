@@ -18,7 +18,7 @@ switch ($page) {
     case in_array($page, range(300,599)):
         include("3xx.php");
         break;
-	case in_array($page, range(700,799)):
+	case in_array($page, range(600,799)):
 	    include("7xx.php");
 	    break;
 	case in_array($page, range(800,999)):

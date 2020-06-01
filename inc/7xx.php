@@ -9,7 +9,7 @@
 
 if(!empty($_SESSION['oauth_token'])){
 	$tweets = $_SESSION['content'];
-	$offset = $page - 700;
+	$offset = $page - 600;
 	
 	$id = $tweets[$offset]->id;
 	
