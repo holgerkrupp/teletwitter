@@ -96,3 +96,37 @@ hr {
     width:100%;
   }
 }
+
+#mobilephonehack {
+	margin-top: 75px;
+	 display: none;
+ 	 float:left;
+	 width: 100%;
+	 align: center;
+	 
+  }
+  #remotecontroltable{
+  	margin: 0 auto; 
+	width: 100%;
+	padding: 10px;
+	
+  }
+  
+.button{
+  	 color:ffffff;
+	 font-size: xx-large;
+	 min-height: 100px;
+	 background-color:#3D4849;
+	 cursor: pointer;
+	 text-align: center;
+	
+	 vertical-align: middle;
+	 
+  }
+
+@media screen and (max-width:1000px) {
+  #mobilephonehack {
+	display: block;
+    overflow: hidden;
+  }
+}
