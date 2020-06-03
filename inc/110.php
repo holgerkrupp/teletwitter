@@ -5,6 +5,7 @@ require "../twitteroauth/autoload.php";
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 
+
 if(empty($_SESSION['screen_name'])){
 
 $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
@@ -16,6 +17,13 @@ try {
 	
 	try{
 		$url = $connection->url("oauth/authorize", ["oauth_token" => $_SESSION['oauth_token']]);
+		
+
+		echo"<script>";
+			echo "var REDIRECTURL = \"$url\";";
+
+		echo"</script>";
+		
 		echo "<a href=\"$url\">Sign in with Twitter</a>";
 
 	}catch (Exception $e){

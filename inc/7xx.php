@@ -13,7 +13,7 @@ if(!empty($_SESSION['oauth_token'])){
 	
 	$id = $tweets[$offset]->id;
 	
-	
+
 	
 	
 
@@ -25,7 +25,7 @@ if(!empty($_SESSION['oauth_token'])){
 		
 		$tweet =$connection->get("statuses/show", ["id" => $id]);
 		
-	
+
 		
 		$user = $tweet->user;
 		
@@ -35,63 +35,89 @@ if(!empty($_SESSION['oauth_token'])){
 		$created_at = $tweet->created_at;
 		$id = $tweet->id;
 		
-
+		$_SESSION['fav_id'] = $id;
+		$_SESSION['follow_screen_name'] = $screen_name;
 		
-		echo "<div class=\"listleft\">";
-		echo $user->name;
-		echo "<br />";
-		echo " (";
-		echo $user->screen_name;
-		echo ") <br />";
-		echo "<br />";
+		echo "<h2>$user->name ($user->screen_name)</h2>";
+		
+
 		echo $user->description;
 		echo "<br />";
 		echo $user->location;
-		echo "</div>";
-		echo "<div class=\"listright\">";
-		echo "&nbsp;";
-		echo "</div>";
+		echo "<br />";
+		echo "<br />";
 		
-		echo "<div class=\"listleft\">";
-		echo "&nbsp;";
-		echo "</div>";
-		echo "<div class=\"listright\">";
-		echo "&nbsp;";
-		echo "</div>";
+
 		
-		echo "<div class=\"listleft\">";
 		echo $text;
+		echo "<br />";
 		echo "<br />";
 		echo $created_at;
 		echo "<br />";
-		echo "</div>";
-		echo "<div class=\"listright\">";
-		echo "&nbsp;";
-		echo "</div>";
-		
-		echo "<div class=\"listleft\">";
+		echo "<br />";
 		echo $urls->url;
 		echo "<br />";
 		echo $place->name;
-		echo "</div>";
-		echo "<div class=\"listright\">";
-		echo "&nbsp;";
-		echo "</div>";
+		echo "<br />";
+		echo "<br />";
+
 		
-		echo "<div class=\"listleft\">";
-		echo "Retweets";
-		echo "</div>";
-		echo "<div class=\"listright\">";
-		echo $tweet->retweet_count;
-		echo "</div>";
+		echo "$tweet->retweet_count Retweets";
+		echo "<br />";
+
 		
-		echo "<div class=\"listleft\">";
-		echo "Favs";
-		echo "</div>";
-		echo "<div class=\"listright\">";
-		echo $tweet->favorite_count;
-		echo "</div>";
 	
+		echo "$tweet->favorite_count Likes";
+
+
+
+		echo "<h3>Actions</h3>";
+		echo "<div class=\"listleft\">";
+		
+		if ($user->following == false){
+			echo "Follow $screen_name";
+		}else{
+			echo "Unfollow $screen_name";
+		}
+		echo "</div>";
+		echo "<div class=\"listright\">";
+		
+		if ($user->following == false){
+			echo "820";
+		}else{
+			echo "821";
+		}
+		echo "</div>";
+		echo "<div class=\"listleft\">";
+		
+		if ($tweet->favorited == false){
+			echo "Like Tweet";
+		}else{
+			echo "Unlike Tweet";
+		}
+		echo "</div>";
+		echo "<div class=\"listright\">";
+		if ($tweet->favorited == false){
+			echo "822";
+		}else{
+			echo "823";
+		}
+		echo "</div>";
+		echo "<div class=\"listleft\">";
+		if ($tweet->retweeted == false){
+			echo "Retweet Tweet";
+		}else{
+			echo "Undo retweet";
+		}
+		echo "</div>";
+		echo "<div class=\"listright\">";
+		if ($tweet->retweeted == false){
+			echo "824";
+		}else{
+			echo "825";
+		}
+		echo "</div>";
+
 		/*
 		echo '<pre>';
 		var_dump($tweet);

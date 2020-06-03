@@ -7,7 +7,7 @@ echo "<title>Teletwitter</title>";
 echo "<meta http-equiv=\"Cache-Control\" content=\"no-cache, no-store, must-revalidate\" />";
 echo "<meta http-equiv=\"Pragma\" content=\"no-cache\" />";
 echo "<meta http-equiv=\"Expires\" content=\"0\" />";
-
+echo "<meta name=\"viewport\" content=\"user-scalable=no\" />";
 echo "</head>";
 
 echo "<style type=\"text/css\" title=\"currentStyle\" media=\"screen\">";
