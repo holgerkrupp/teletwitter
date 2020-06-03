@@ -5,8 +5,11 @@ require "inc/twitter_tokens.php";
 require "twitteroauth/autoload.php";
 
 
+
 ?>
 
+
+<body >
 
 <div id='header'>
 	<div style="width: 20%; float:left" id ='page'>
@@ -24,7 +27,7 @@ require "twitteroauth/autoload.php";
 </div>
 
 
-<div id='main'>
+<div id='main' >
   <h1>Teletwitter</h1>
   <div id ='pagecontent'>
 	  <?php
@@ -34,8 +37,10 @@ require "twitteroauth/autoload.php";
 </div>
 <?php
 	include("inc/footer.php");
+	include("inc/remotecontrol.php");
 ?>
 
 <?php
-echo "</html>";
+
+echo "</body></html>";
 ?>
