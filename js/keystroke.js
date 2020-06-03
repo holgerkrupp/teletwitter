@@ -6,33 +6,50 @@ document.addEventListener("keydown", keyDownTextField, false);
 var current = 100; // parseint(document.getElementById("currentpage").innerHTML)
 var running = false;
 
+function remoteclick(e){
+	if (running == false){
+		search(e);
+	}
+}
+
 
 function keyDownTextField(e) {
 var keyCode = e.keyCode;
+
+var char = String.fromCharCode(keyCode);
+var number = parseInt(char, 10);
+
 if (running == false){
-  if((keyCode > 46 && keyCode < 58)||(keyCode > 96 && keyCode < 106)) {
+  if(Number.isInteger(number)) {
 	  
-	  var length = document.getElementById("pagelookup").innerHTML.length;
-	  
-	  if (length >= 3){
-		  document.getElementById("pagelookup").innerHTML = String.fromCharCode(keyCode);
-	  } else {
-		  document.getElementById("pagelookup").innerHTML = document.getElementById("pagelookup").innerHTML + String.fromCharCode(keyCode);
-	  }
-	  if (document.getElementById("pagelookup").innerHTML.length == 3){
-		  if ((document.getElementById("pagelookup").innerHTML < 100)||(document.getElementById("pagelookup").innerHTML > 899)){
-			  document.getElementById("pagelookup").innerHTML = "";
-		  }else{
-		  	running = true;
-	  		loadtopage(document.getElementById("pagelookup").innerHTML);
-		}
-	  }
+	  var number = number;
+	  search(number);
+	  // ||(keyCode > 96 && keyCode < 106)
+
 	  
   } else {
 
 	  
   }
+	}
 }
+
+function search(number){
+  var length = document.getElementById("pagelookup").innerHTML.length;
+  
+  if (length >= 3){
+	  document.getElementById("pagelookup").innerHTML = number;
+  } else {
+	  document.getElementById("pagelookup").innerHTML = document.getElementById("pagelookup").innerHTML + number;
+  }
+  if (document.getElementById("pagelookup").innerHTML.length == 3){
+	  if ((document.getElementById("pagelookup").innerHTML < 100)||(document.getElementById("pagelookup").innerHTML > 899)){
+		  document.getElementById("pagelookup").innerHTML = "";
+	  }else{
+	  	running = true;
+  		loadtopage(document.getElementById("pagelookup").innerHTML);
+	}
+  }
 }
 
 function loadtopage(p){
@@ -40,6 +57,11 @@ function loadtopage(p){
 	loaded(p);
 	running = false;
 */	
+	
+	
+
+	
+	    
 	var counter = setInterval(function(){
 		if (current < 10){
 			pagenumber = "00" + current;
@@ -67,8 +89,12 @@ function loadtopage(p){
 
 function loaded(p){
 	p = parseInt(p);
+	if (p == 111){
+		loginwithtwitter;
+	}else{
 	var parameter = "page="+p;
 	callPHP(parameter);
+	}
 }
 
 
@@ -83,6 +109,16 @@ function callPHP(params) {
         if(httpc.readyState == 4 && httpc.status == 200) { // complete and no errors
 			
             document.getElementById("pagecontent").innerHTML = httpc.response;
+			var n = httpc.response.search("REDIRECTURL");
+			if (n >= 0){
+				var url = httpc.response.substring(n+14, n+12+200);
+				var m = url.search('";</script>');
+				url = url.substring(1,m);
+				if (url) {
+				    window.location = url;
+				}
+			}
+
         }
     };
     httpc.send(params);
