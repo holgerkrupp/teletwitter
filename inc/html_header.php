@@ -8,6 +8,11 @@ echo "<meta http-equiv=\"Cache-Control\" content=\"no-cache, no-store, must-reva
 echo "<meta http-equiv=\"Pragma\" content=\"no-cache\" />";
 echo "<meta http-equiv=\"Expires\" content=\"0\" />";
 echo "<meta name=\"viewport\" content=\"user-scalable=no\" />";
+
+
+echo "<meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />";
+echo "<meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\" />";
+echo "<link rel=\"apple-touch-icon\" href=\"/iOS-Touch-TeleTwitter.png\">";
 echo "</head>";
 
 echo "<style type=\"text/css\" title=\"currentStyle\" media=\"screen\">";
